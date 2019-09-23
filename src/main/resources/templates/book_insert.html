@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert Book</title>
+</head>
+<body>
+    <div>
+        <h1>添加图书信息</h1>
+        <form action="/insertBook" method="post">
+            图书id：<input type="text" name="id" id="id"/> <br />
+            图书名称:<input type="text" name="bookName" id="bookName"/> <br />
+            图书价格:<input type="text" name="bookPrice" id="bookPrice"/> <br />
+            <input type="submit" value="Submit"/>
+        </form>
+
+    </div>
+</body>
+</html>

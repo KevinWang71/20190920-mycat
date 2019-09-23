@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8">
+    <title>All Book</title>
+    <script type="text/javascript" src="/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                type: "get",
+                url: "/selectAllBook",
+                success: function (data) {
+                    var bookList = data.result;
+                    if (200 == data.code) {
+                        //说明获取到了数据
+                        var tr = "";
+                        for (var i = 0; i < bookList.length; i++) {
+                            tr += "<tr>" +
+                                "<td>" + bookList[i].id + "</td>" +
+                                "<td>" + bookList[i].bookName + "</td>" +
+                                "<td>" + bookList[i].bookPrice + "</td>" +
+                                "<td>" +
+                                "<input type='button' onclick='deleteBook("+bookList[i].id+")' value='删除'/>"+
+                                "<input type='button' onclick='updateBook("+bookList[i].id+")' value='修改'/>"+
+                                "</td>" +
+                                "</tr>"
+                        }
+                        $("#allBook").append("<table border='1px solid pink'>" +
+                            "<thead>" +
+                            "<tr>" +
+                            "<th>图书编号</th>" +
+                            "<th>图书名称</th>" +
+                            "<th>图书价格</th>" +
+                            "<th>操作</th>" +
+                            "</tr>" +
+                            "</thead>" +
+                            "<tbody>" +
+                            tr +
+                            "</tbody>" +
+                            "</table>");
+                    } else {
+                        alert("未获得数据");
+                    }
+                },
+                error: function () {
+                    alert("请求错误！！！")
+                }
+            });
+
+        });
+    </script>
+</head>
+<body>
+<div>
+    <a th:href="@{'/turnInsertPage'}">添加图书</a>&nbsp;&nbsp;
+</div>
+<div id="allBook">
+
+</div>
+</body>
+</html>
